@@ -21,6 +21,7 @@ import comp208.best.testprovider.model.Album;
 public class TestContentProvider extends ContentProvider {
     MatrixCursor mc;
     MatrixCursor.RowBuilder rb;
+
     public TestContentProvider() {
     }
 
@@ -51,15 +52,16 @@ public class TestContentProvider extends ContentProvider {
         return false;
     }
 
-    String TAG ="--++";
+    String TAG = "--++";
+
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
-        Log.i(TAG, "query: "+"inside content provider");
+        Log.i(TAG, "query: " + "inside content provider");
         /**
          * This method typically runs a database query, or make a request to a remote API
          */
-        Runnable runHttpGetAlbums = () -> {
+        mc = new MatrixCursor(Contract.columnNames);
             Log.i(TAG, "getAlbums: started to make get request");
             try {
                 URL url = new URL("https://jsonplaceholder.typicode.com/albums");
@@ -73,16 +75,15 @@ public class TestContentProvider extends ContentProvider {
                 StringBuilder builder = new StringBuilder();
                 String line;
 
-                while ((line = bufferedReader.readLine()) != null)
-                {
+                while ((line = bufferedReader.readLine()) != null) {
                     builder.append(line);
                 }
                 String json = builder.toString();
-    //                Log.i(TAG, json);
+                //                Log.i(TAG, json);
 
                 Gson gson = new Gson();
-                Album [] albums = gson.fromJson(json, Album[].class);
-                for (Album album: albums){
+                Album[] albums = gson.fromJson(json, Album[].class);
+                for (Album album : albums) {
                     rb = mc.newRow();
                     rb.add("userId", album.getUserId());
                     rb.add("id", album.getId());
@@ -92,11 +93,8 @@ public class TestContentProvider extends ContentProvider {
 
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-    };
-    Thread thread = new Thread(runHttpGetAlbums);
-    thread.start();
-    return mc;
+        };
+        return mc;
     }
 
     @Override
@@ -107,8 +105,8 @@ public class TestContentProvider extends ContentProvider {
     }
 
     // Contract class to hold all relevant data
-    public static class Contract{
+    public static class Contract {
         public static final String AUTHORITY = "test.provider";
-        public static String[] columnNames ={"userId", "id", "title"};
+        public static String[] columnNames = {"userId", "id", "title"};
     }
 }
