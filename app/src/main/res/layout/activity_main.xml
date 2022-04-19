@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:divider="#f00"
+        android:divider="#000000"
         android:dividerHeight="1dp"
         android:maxLines="10"
         android:scrollbars="vertical"

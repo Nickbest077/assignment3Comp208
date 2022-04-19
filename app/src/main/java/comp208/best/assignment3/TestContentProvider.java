@@ -1,4 +1,4 @@
-package comp208.best.testprovider;
+package comp208.best.assignment3;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -16,7 +16,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import comp208.best.testprovider.model.Album;
+import comp208.best.assignment3.model.Album;
 
 public class TestContentProvider extends ContentProvider {
     MatrixCursor mc;
@@ -54,6 +54,20 @@ public class TestContentProvider extends ContentProvider {
 
     String TAG = "--++";
 
+
+    /**
+     * query function that sends get request to the api
+     * that returns a json list of album objects
+     * Builds the returned string into an array which is then used
+     * to populate the cursor which is then returned
+     *
+     * @param uri
+     * @param projection
+     * @param selection
+     * @param selectionArgs
+     * @param sortOrder
+     * @return
+     */
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
@@ -106,7 +120,7 @@ public class TestContentProvider extends ContentProvider {
 
     // Contract class to hold all relevant data
     public static class Contract {
-        public static final String AUTHORITY = "test.provider";
+        public static final String AUTHORITY = "test.provider.new";
         public static String[] columnNames = {"userId", "id", "title"};
     }
 }

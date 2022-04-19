@@ -1,4 +1,4 @@
-package comp208.best.testprovider;
+package comp208.best.assignment3;
 
 import org.junit.Test;
 

@@ -1,32 +1,20 @@
-package comp208.best.testprovider;
-
-import androidx.appcompat.app.AppCompatActivity;
+package comp208.best.assignment3;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
-import javax.net.ssl.HttpsURLConnection;
-
-import comp208.best.testprovider.adapters.AlbumAdapter;
-import comp208.best.testprovider.model.Album;
+import comp208.best.assignment3.adapters.AlbumAdapter;
+import comp208.best.assignment3.model.Album;
+import comp208.best.assignment3.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,18 +25,25 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Album> albums = new ArrayList<>();
     AlbumAdapter arrayAdapter;
 
+    /**
+     * When activity is created listView is assigned
+     * and albums are loaded and displayed on the screen
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = findViewById(R.id.txtData);
         listView = (ListView) findViewById(R.id.txtData);
         loadAlbums();
 
-
-
     }
 
+    /**
+     * Runnable that displays the list of albums as ListView
+     * uses custom Album Adapter to handle display of album objects
+     */
     Runnable showDataList = () ->
     {
         listView.setAdapter(null);
@@ -58,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
     };
 
+    /**
+     * function to load values from matrix cursor into a list in main activity
+     * content provider is queried then returns the list of albums
+     * showData list isd then called to display values as a ListView with custom layout
+     */
     void loadAlbums() {
         Runnable getAlbums = () -> {
             ContentResolver contentResolver = getContentResolver();

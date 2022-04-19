@@ -1,4 +1,4 @@
-package comp208.best.testprovider.adapters;
+package comp208.best.assignment3.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,9 +10,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import comp208.best.testprovider.R;
-import comp208.best.testprovider.model.Album;
+import comp208.best.assignment3.R;
+import comp208.best.assignment3.model.Album;
 
+/**
+ * Custom adapter for listview to display album objects
+ * Displays user ID, album ID and title
+ */
 public class AlbumAdapter extends BaseAdapter {
 
     Context context;
@@ -41,6 +45,9 @@ public class AlbumAdapter extends BaseAdapter {
         return i;
     }
 
+    /**
+     * Loads text views from custom layout with values from album objects
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewGroup va;

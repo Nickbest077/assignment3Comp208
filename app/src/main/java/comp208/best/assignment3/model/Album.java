@@ -1,4 +1,4 @@
-package comp208.best.testprovider.model;
+package comp208.best.assignment3.model;
 
 public class Album {
     Integer userId;

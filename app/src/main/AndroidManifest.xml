@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="comp208.best.testprovider">
+    package="comp208.best.assignment3">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
@@ -10,13 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestProvider">
         <provider
-            android:name=".TestContentProvider"
-            android:authorities="test.provider"
+            android:name="comp208.best.assignment3.TestContentProvider"
+            android:authorities="test.provider.new"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true">
+
+        </provider>
 
         <activity
-            android:name=".MainActivity"
+            android:name="comp208.best.assignment3.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
